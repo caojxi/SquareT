@@ -15,7 +15,10 @@ class CreateTimersTable extends Migration
     {
         Schema::create('timers', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->integer('task_id')->unsigned();
+            $table->foreign('task_id')->references('id')->on('tasks')->onDelete('cascade');
+            $table->date('start');
+            $table->date('end')->nullable();
         });
     }
 
